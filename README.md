@@ -20,6 +20,7 @@ Both LaunchAgents/LaunchDaemons are stored in PLIST files in a variety locations
 Both LaunchAgents/LaunchDaemons contain similar/same data. However, many features are optional. LaunchAgents/LaunchDaemons only have two required features. Some data includes:
 * Label (Required according to Apple. However, not not all LaunchAgents/LaunchDaemons have a label)
 * ProgramArguments (Required according to Apple. However, not not all LaunchAgents/LaunchDaemons have a label)  
+
 Some potential optional features:
 * Program Path
 * EnvironmentVariables
