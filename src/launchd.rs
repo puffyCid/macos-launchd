@@ -11,7 +11,6 @@ use serde::Serialize;
 
 #[derive(Debug, Serialize)]
 pub struct LaunchdPlist {
-    #[serde(flatten)]
     pub launchd_data: Dictionary,
     pub plist_path: String,
 }

@@ -26,6 +26,7 @@ fn parse_data(results: Vec<LaunchdPlist>) {
 
     let serde_data =
         serde_json::to_string(&results).expect("Failed to convert data to json string using serde");
+
     json_file
         .write_all(serde_data.as_bytes())
         .expect("Failed to write data json");
