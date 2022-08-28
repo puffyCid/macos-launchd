@@ -4,7 +4,7 @@
 
 use std::{fs::read_dir, path::Path};
 
-use crate::error::LaunchdError;
+use crate::{error::LaunchdError, size::get_file_size};
 use log::warn;
 use plist::Dictionary;
 use serde::Serialize;
@@ -35,9 +35,10 @@ impl LaunchdPlist {
 
         let mut launchd_plist_vec: Vec<LaunchdPlist> = Vec::new();
         for data in plist_files {
-            if !data.ends_with("plist") {
+            if !data.ends_with("plist") || !get_file_size(&data) {
                 continue;
             }
+
             let launchd_results: Result<Dictionary, plist::Error> = plist::from_file(&data);
             match launchd_results {
                 Ok(launchd_data_dictionary) => {
@@ -142,9 +143,10 @@ impl LaunchdPlist {
             let entry = dir?;
             let path = format!("{}{}", entry.path().display(), agents_path);
             let full_path = Path::new(&path);
-            if !full_path.is_dir() {
+            if !full_path.is_dir() || !get_file_size(&path) {
                 continue;
             }
+
             let mut plist_files = LaunchdPlist::launchd_data(&full_path.display().to_string())?;
             agent_plist_files.append(&mut plist_files);
         }
